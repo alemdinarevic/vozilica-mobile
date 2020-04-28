@@ -1,27 +1,65 @@
 import React, {useState} from 'react';
-import {View, ScrollView, StyleSheet, Text} from 'react-native';
+import {View, ScrollView, StyleSheet, Text, Button} from 'react-native';
 
-import DatePicker from 'react-native-date-picker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import Input from '../components/Input';
-import Calendars from '../components/Calendars';
+import DatePickerButton from '../components/Buttons/DatePickerButton';
+import ConfirmButton from '../components/Buttons/ConfirmButton';
 
 import Colors from '../constants/Colors';
 
 const HomeScreen = (props) => {
 
 	const [enteredAddress, setEnteredAddress] = useState('');
+
 	const [startDate, setStartDate] = useState(new Date());
 	const [endDate, setEndDate] = useState(new Date());
 
-	const enteredAddressHandler = () => {};
+	const [isStartDatePickerVisible, setStartDatePickerVisibility] = useState(false);
+	const [isEndDatePickerVisible, setEndDatePickerVisibility] = useState(false);
+
+	const enteredAddressHandler = (value) => {
+		setEnteredAddress(value);
+		//console.log(value);
+	};
+
+	// from date functions
+  const showStartDatePicker = () => {
+    setStartDatePickerVisibility(true);
+	};
+
+	const hideStartDatePicker = () => {
+    setStartDatePickerVisibility(false);
+	};
+
+	const handleStartDatePickerConfirm = (date) => {
+		console.warn("A date has been picked: ", date);
+		setStartDate(date);
+    hideStartDatePicker();
+	};
+
+	//end date functions
+	const showEndDatePicker = () => {
+    setEndDatePickerVisibility(true);
+  };
+	
+	const hideEndDatePicker = () => {
+    setEndDatePickerVisibility(false);
+  };
+
+	const handleEndDatePickerConfirm = (date) => {
+		console.warn("A date has been picked: ", date);
+		setEndDate(date);
+    hideEndDatePicker();
+  };
 
   return (
 		<ScrollView contentContainerStyle={styles.screen}>
 
 			<View style={styles.welcomeTextContainer}>
-				<Text style={styles.welcomeText1}>NAPRAVI SVOJU REZERVACIJU</Text>
-				<Text style={styles.welcomeText2}>Dobrodošli na najveću aplikaciju za rentanje vozila na našem tržištu.</Text>
+				<Text style={styles.welcomeText1}>Dobrodošli na najveću aplikaciju za rentanje vozila na našem tržištu.</Text>
+				<Text style={styles.welcomeText2}>NAPRAVI SVOJU REZERVACIJU</Text>
 			</View>
 
 			<View style={styles.inputContainer}>
@@ -33,19 +71,37 @@ const HomeScreen = (props) => {
 					onChangeText={enteredAddressHandler}
 				/>
 
-				<DatePicker 
-					date={startDate}
-					onDateChange={setStartDate}
-				/>
+				<View style={styles.fromView}>
+					<DatePickerButton onPress={showStartDatePicker}>
+						Od
+					</DatePickerButton>
+					<DateTimePickerModal
+						isVisible={isStartDatePickerVisible}
+						mode="datetime"
+						onConfirm={handleStartDatePickerConfirm}
+						onCancel={hideStartDatePicker}
+					/>
+    		</View>
+				
+				<View style={styles.toView}>
+					<DatePickerButton onPress={showEndDatePicker}>
+						Do 
+					</DatePickerButton>
 
-				<DatePicker 
-					date={endDate}
-					onDateChange={setEndDate}
-				/>
+					<DateTimePickerModal
+						isVisible={isEndDatePickerVisible}
+						mode="datetime"
+						onConfirm={handleEndDatePickerConfirm}
+						onCancel={hideEndDatePicker}
+					/>
+    		</View>
 
+				<View>
+					<Text>{startDate.toString()} - {endDate.toString()}</Text>
+				</View>
 
+				<ConfirmButton />
 
-				{/* <Calendars /> */}
 			</View>
 
 		</ScrollView>
@@ -67,18 +123,28 @@ const styles = StyleSheet.create({
 	},
 	welcomeText1: {
 		color: 'white',
-		fontSize: 38,
-		textAlign: 'center'
+		fontSize: 16,
+		textAlign: 'center',
+		marginBottom: 10
 	},
 	welcomeText2: {
-		fontSize: 16,
-		textAlign: "center"
+		color: 'white',
+		fontSize: 38,
+		textAlign: "center",
+		marginTop: 30
 	},
 	inputContainer: {
 		backgroundColor: 'white',
 		alignItems: 'center',
 		width: '85%',
-		height: 300
+		height: 300,
+		paddingTop: 10
+	},
+	fromView: {
+		marginVertical: 5,
+	},
+	toView: {
+		marginVertical: 5
 	}
 });
 export default HomeScreen;

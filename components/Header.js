@@ -10,14 +10,15 @@ const Header = (props) => {
 			<View style={styles.logoContainer}>
 				<Logo />
 			</View>
-			
-			<Text style={styles.loginLink}>Prijavi se</Text>
-			</View>
+			{/* <Text style={styles.loginLink}>Prijavi se</Text> */}
+		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	header: {
+		marginVertical: 0,
+		marginHorizontal: 0,
 		width: '100%',
 		height: '10%',
 		flexDirection: 'row',
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.secondary
 	},
 	logoContainer: {
-		marginTop: Dimensions.get('window').height * 0.03,
+		marginTop: Dimensions.get('window').height * 0.025,
 		marginLeft: Dimensions.get('window').width * 0.3,
 	},
 	loginLink: {
@@ -37,8 +38,3 @@ const styles = StyleSheet.create({
 });
 
 export default Header;
-
-// $app-blue-main: #415171;
-// $app-blue-dark: #323E5F;
-// $app-blue: #05728f;
-// $app-blue-light: #CFDBE1;

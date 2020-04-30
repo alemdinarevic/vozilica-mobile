@@ -3,7 +3,8 @@ import {View, ScrollView, StyleSheet, Text, Button} from 'react-native';
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-import Input from '../components/Input';
+import Input from '../components/UI/Input';
+import Card from '../components/UI/Card';
 import DatePickerButton from '../components/Buttons/DatePickerButton';
 import ConfirmButton from '../components/Buttons/ConfirmButton';
 
@@ -58,11 +59,11 @@ const HomeScreen = (props) => {
 		<ScrollView contentContainerStyle={styles.screen}>
 
 			<View style={styles.welcomeTextContainer}>
-				<Text style={styles.welcomeText1}>Dobrodošli na najveću aplikaciju za rentanje vozila na našem tržištu.</Text>
+				<Text style={styles.welcomeText1}>Dobrodošli na našu aplikaciju za rentanje vozila, pionirsku na našem tržištu.</Text>
 				<Text style={styles.welcomeText2}>NAPRAVI SVOJU REZERVACIJU</Text>
 			</View>
 
-			<View style={styles.inputContainer}>
+			<Card style={styles.inputContainer}>
 
 				<Input 
 					style={styles.inputAddress}
@@ -81,7 +82,7 @@ const HomeScreen = (props) => {
 						onConfirm={handleStartDatePickerConfirm}
 						onCancel={hideStartDatePicker}
 					/>
-    		</View>
+    			</View>
 				
 				<View style={styles.toView}>
 					<DatePickerButton onPress={showEndDatePicker}>
@@ -94,15 +95,18 @@ const HomeScreen = (props) => {
 						onConfirm={handleEndDatePickerConfirm}
 						onCancel={hideEndDatePicker}
 					/>
-    		</View>
+    			</View>
 
 				<View>
 					<Text>{startDate.toString()} - {endDate.toString()}</Text>
 				</View>
 
-				<ConfirmButton />
+				<ConfirmButton
+					onPress={() => props.navigation.navigate({routeName: 'Filters'})}>
+						Potvrdi
+				</ConfirmButton>
 
-			</View>
+			</Card>
 
 		</ScrollView>
 		
@@ -139,6 +143,9 @@ const styles = StyleSheet.create({
 		width: '85%',
 		height: 300,
 		paddingTop: 10
+	},
+	inputAddress: {
+		width: '80%'
 	},
 	fromView: {
 		marginVertical: 5,

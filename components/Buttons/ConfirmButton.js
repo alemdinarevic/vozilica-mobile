@@ -5,9 +5,9 @@ import Colors from '../../constants/Colors';
 
 const ConfirmButton = (props) => {
 	return (
-		<TouchableOpacity activeOpacity={0.5} onPress={props.onPress}>
+		<TouchableOpacity {...props} activeOpacity={0.5} onPress={props.onPress}>
 			<View style={{...styles.button, ...props.style}}>
-				<Text style={styles.buttonText}>Confirm</Text>
+				<Text style={styles.buttonText}>{props.children}</Text>
 			</View>
 		</TouchableOpacity>
 	);
@@ -16,6 +16,7 @@ const ConfirmButton = (props) => {
 const styles = StyleSheet.create({
 	button: {
 		backgroundColor: Colors.tertiary,
+		//marginVertical: 10,
 		paddingVertical: 15,
 		paddingHorizontal: 15,
         borderRadius: 25,

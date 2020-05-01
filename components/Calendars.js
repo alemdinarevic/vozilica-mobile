@@ -8,8 +8,8 @@ const Calendars = (props) => {
 		<View>
 			{/* //Start date calendar */}
 		<Calendar />
-		{/* //End date calendar */}
-		<Calendar />
+		{/* End date calendar
+		<Calendar /> */}
 		</View>
 	);
 }

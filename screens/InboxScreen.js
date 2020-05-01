@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 const InboxScreen = (props) => {
 	return(
 		<View style={styles.screen}>
-			<Text>Filters</Text>
+			<Text>Inbox</Text>
 		</View>
 	);
 }

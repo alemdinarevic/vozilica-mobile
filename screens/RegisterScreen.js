@@ -1,14 +1,17 @@
 import React from 'react';
 import {ScrollView, View, Text, StyleSheet, KeyboardAvoidingView, Button} from 'react-native';
 
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+
 import Colors from '../constants/Colors';
 
 import Input from '../components/UI/Input';
 import Card from '../components/UI/Card';
 
 import ConfirmButton from '../components/Buttons/ConfirmButton';
+import HeaderButton from '../components/Buttons/HeaderButton';
 
-const AuthScreen = (props) => {
+const RegisterScreen = (props) => {
 	return (
 		<KeyboardAvoidingView 
 			style={styles.screen} 
@@ -79,7 +82,7 @@ const AuthScreen = (props) => {
 
 					<ConfirmButton 
 						style={{width: 115}}
-						onPress={() => props.navigation.navigate({routeName: 'Auth'})}>
+						onPress={() => props.navigation.navigate({routeName: 'Login'})}>
 							Prijavi se
 					</ConfirmButton>
 					</View>
@@ -89,6 +92,16 @@ const AuthScreen = (props) => {
 			</Card>
 		</KeyboardAvoidingView>
 	);
+}
+
+RegisterScreen.navigationOptions = (navData) => {
+	return {
+		headerLeft: () => (
+			<HeaderButtons HeaderButtonComponent={HeaderButton}>
+			<Item title='menu' iconName='ios-menu' onPress={() => navData.navigation.toggleDrawer()}/>
+		</HeaderButtons>
+		)
+	}	
 }
 
 const styles = StyleSheet.create({
@@ -111,4 +124,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default AuthScreen;
+export default RegisterScreen;

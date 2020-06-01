@@ -18,7 +18,7 @@ const FiltersScreen = (props) => {
 				</View>
 				
 				<View style={styles.filterContainer}>
-					<Text>Brand</Text>
+					<Text>Brend</Text>
 					<ModalDropdown style={styles.filter} options={['Audi', 'BMW', 'Mercedes', 'Opel', 'Renault', 'VW']}/>
 				</View>
 
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1
 	},
 	filter: {
-		
+		marginTop: 2.5
 	}
 });
 

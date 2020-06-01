@@ -3,14 +3,13 @@ import React from 'react';
 import {Ionicons, EvilIcons, MaterialIcons} from '@expo/vector-icons';
 
 import {createAppContainer} from 'react-navigation';
-import { NavigationContainer } from '@react-navigation/native';
 
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import HomeScreen from '../screens/HomeScreen';
-import AuthScreen from '../screens/AuthScreen';
+import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import UserProfileScreen from '../screens/UserProfileScreen';
 import FiltersScreen from '../screens/FiltersScreen';
@@ -22,7 +21,8 @@ import MiscellaneousScreen from '../screens/MiscellaneousScreen';
 import Header from '../components/Header';
 import Logo from '../components/Logo';
 import Colors from '../constants/Colors';
-import UserProfile from '../screens/UserProfileScreen';
+
+
 
 const defaultStackNavigatorOptions = {
 	headerStyle: {
@@ -100,8 +100,8 @@ const HomeFiltersSearchNavigator = createStackNavigator({
 	});
 
 const UserAuthNavigation = createStackNavigator({
-	Auth: {
-		screen: AuthScreen,
+	Login: {
+		screen: LoginScreen,
 		navigationOptions: {
 			title: 'Prijavi se'
 		}
@@ -112,18 +112,12 @@ const UserAuthNavigation = createStackNavigator({
 			title: 'Registruj se'
 		}
 	},
-	UserProfile: {
-		screen: UserProfileScreen,
-		navigationOptions: {
-			title: 'Profil'
-		}
-	}
 }, {
 	defaultNavigationOptions: defaultStackNavigatorOptions
 	}
 );
 
-const MainNavigator = createBottomTabNavigator({
+const BottomTabNavigator = createBottomTabNavigator({
 	HomeFiltersSearch: {
 		screen: HomeFiltersSearchNavigator, 
 		navigationOptions: {
@@ -133,7 +127,7 @@ const MainNavigator = createBottomTabNavigator({
 	},
 
 	User: {
-		screen: UserAuthNavigation,
+		screen: UserProfileScreen,
 		navigationOptions: {
 			tabBarIcon: (tabInfo) => {return <EvilIcons name='user' size={20} color={tabInfo.tintColor}/>}
 		}
@@ -165,6 +159,9 @@ const MainNavigator = createBottomTabNavigator({
 	}
 });
 
-export default createAppContainer(MainNavigator);
+const LeftSideDrawerNavigator = createDrawerNavigator({
+	Authentication: UserAuthNavigation,
+	Home: BottomTabNavigator
+});
 
-
+export default createAppContainer(LeftSideDrawerNavigator);

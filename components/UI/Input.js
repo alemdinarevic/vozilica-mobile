@@ -11,8 +11,8 @@ const Input = (props) => {
 
 const styles = StyleSheet.create({
 	input: {
-		height: 50,
 		//width: '90%',
+		height: 50,
 		borderColor: Colors.quaternary,
 		borderWidth: 1,
 		borderRadius: 10,

@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
-import {View, ScrollView, StyleSheet, Text, Button} from 'react-native';
+import {View, ScrollView, StyleSheet, Text} from 'react-native';
 
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+
+import moment from 'moment';
 
 import Input from '../components/UI/Input';
 import Card from '../components/UI/Card';
 import DatePickerButton from '../components/Buttons/DatePickerButton';
 import ConfirmButton from '../components/Buttons/ConfirmButton';
+import HeaderButton from '../components/Buttons/HeaderButton';
 
 import Colors from '../constants/Colors';
 
@@ -25,7 +29,7 @@ const HomeScreen = (props) => {
 		//console.log(value);
 	};
 
-	// from date functions
+	// start date functions
   const showStartDatePicker = () => {
     setStartDatePickerVisibility(true);
 	};
@@ -72,45 +76,61 @@ const HomeScreen = (props) => {
 					onChangeText={enteredAddressHandler}
 				/>
 
-				<View style={styles.fromView}>
-					<DatePickerButton onPress={showStartDatePicker}>
-						Od
-					</DatePickerButton>
-					<DateTimePickerModal
-						isVisible={isStartDatePickerVisible}
-						mode="datetime"
-						onConfirm={handleStartDatePickerConfirm}
-						onCancel={hideStartDatePicker}
-					/>
-    			</View>
-				
-				<View style={styles.toView}>
-					<DatePickerButton onPress={showEndDatePicker}>
-						Do 
-					</DatePickerButton>
+				<View style={styles.pickerContainer}>
+					<View style={styles.fromView}>
+						<DatePickerButton onPress={showStartDatePicker}>
+							Od
+						</DatePickerButton>
+						<DateTimePickerModal
+							isVisible={isStartDatePickerVisible}
+							mode="datetime"
+							onConfirm={handleStartDatePickerConfirm}
+							onCancel={hideStartDatePicker}
+						/>
+						</View>
+					
+					<View style={styles.toView}>
+						<DatePickerButton onPress={showEndDatePicker}>
+							Do 
+						</DatePickerButton>
 
-					<DateTimePickerModal
-						isVisible={isEndDatePickerVisible}
-						mode="datetime"
-						onConfirm={handleEndDatePickerConfirm}
-						onCancel={hideEndDatePicker}
-					/>
-    			</View>
+						<DateTimePickerModal
+							isVisible={isEndDatePickerVisible}
+							mode="datetime"
+							onConfirm={handleEndDatePickerConfirm}
+							onCancel={hideEndDatePicker}
+						/>
+						</View>
+					</View>
+			
 
-				<View>
-					<Text>{startDate.toString()} - {endDate.toString()}</Text>
+				<View style={styles.chosenStartEndDateContainer}>
+					<Text>{moment(startDate).format('LLL')}</Text>
+					<Text>-</Text>
+					<Text>{moment(endDate).format('LLL')}</Text>
 				</View>
 
-				<ConfirmButton
-					onPress={() => props.navigation.navigate({routeName: 'Filters'})}>
-						Potvrdi
-				</ConfirmButton>
+				<View style={styles.confirmButtonContainer}>
+					<ConfirmButton
+						onPress={() => props.navigation.navigate({routeName: 'Filters'})}>
+							Potvrdi
+					</ConfirmButton>
+				</View>
 
 			</Card>
-
 		</ScrollView>
 		
 	);
+}
+
+HomeScreen.navigationOptions = (navData) => {
+	return {
+		headerLeft: () => (
+			<HeaderButtons HeaderButtonComponent={HeaderButton}>
+			<Item title='menu' iconName='ios-menu' onPress={() => navData.navigation.toggleDrawer()}/>
+		</HeaderButtons>
+		)
+	}	
 }
 
 const styles = StyleSheet.create({
@@ -147,11 +167,26 @@ const styles = StyleSheet.create({
 	inputAddress: {
 		width: '80%'
 	},
+	pickerContainer: {
+		marginVertical: 10,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		
+	},
 	fromView: {
 		marginVertical: 5,
+		marginHorizontal: 15
 	},
 	toView: {
-		marginVertical: 5
+		marginVertical: 5,
+		marginHorizontal: 15
+	},
+	chosenStartEndDateContainer: {
+		marginVertical: 5,
+		alignItems: 'center'
+	},
+	confirmButtonContainer: {
+		marginTop: 20
 	}
 });
 export default HomeScreen;

@@ -5,6 +5,7 @@ const MiscellaneousScreen = (props) => {
 	return(
 		<View style={styles.screen}>
 			<Text>Miscellaneous</Text>
+			<Text>About Ducats</Text>
 		</View>
 	);
 }

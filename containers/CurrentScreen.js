@@ -4,7 +4,7 @@ import {View, StyleSheet} from 'react-native';
 import Header from '../components/Header';
 
 import HomeScreen from '../screens/HomeScreen';
-import AuthScreen from '../screens/AuthScreen';
+import AuthScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import FiltersScreen from '../screens/FiltersScreen';
 

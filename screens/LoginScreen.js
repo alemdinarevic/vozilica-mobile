@@ -1,8 +1,12 @@
-import React from 'react';
-import {ScrollView, View, StyleSheet, KeyboardAvoidingView} from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, View, StyleSheet, Text, KeyboardAvoidingView } from 'react-native';
 
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import { showMessage } from "react-native-flash-message";
+import { useSelector, useDispatch } from "react-redux";
 
+
+import * as authActions from "../store/actions/auth";
 import Colors from '../constants/Colors';
 
 import Input from '../components/UI/Input';
@@ -12,6 +16,34 @@ import ConfirmButton from '../components/Buttons/ConfirmButton';
 import HeaderButton from '../components/Buttons/HeaderButton';
 
 const LoginScreen = (props) => {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+	const dispatch = useDispatch();
+	
+	const authHandler = () => {
+    let action = authActions.login(email, password);
+    setError(null);
+    setIsLoading(true);
+
+    dispatch(action)
+      .then((response) => {
+        setIsLoading(false);
+        showMessage({
+          message: "Successfully logged in",
+          type: "success",
+        });
+        console.log('in then')
+        props.navigation.navigate("Home");
+      })
+      .catch((error) => {
+				console.log(error)
+        console.log("IN CATCH OF DISPATCH auth actions");
+        setError(error.message);
+        setIsLoading(false);
+      });
+  };
 	return (
 		<KeyboardAvoidingView 
 			style={styles.screen} 
@@ -27,12 +59,13 @@ const LoginScreen = (props) => {
 						keyboardType='email-address' 
 						//required
 						//email
-						autoCapitalize='none' 
+						autoCapitalize='none'
+						onChangeText={(text) => setEmail(text)} 
 						errorMessage='Please enter a valid e-mail address'
-						onInputChange={() => {}}
+						//onInputChange={() => {}}
 						initialValue=''
 					/>
-
+					<Text>{email}</Text>
 					<Input 
 						id='password' 
 						label='Password'
@@ -41,15 +74,17 @@ const LoginScreen = (props) => {
 						secureTextEntry={true}
 						//required
 						minLength={5}
+						onChangeText={(text) => setPassword(text)}
 						autoCapitalize='none' 
 						errorMessage='Please enter a valid password'
-						onInputChange={() => {}}
+						// onInputChange={() => {}}
 						initialValue=''
 					/>
+					<Text>{password}</Text>
 					<View style={styles.buttonContainer}>
 					<ConfirmButton 
 						style={{marginVertical: 10}}
-						onPress={() => {}}>
+						onPress={authHandler}>
 							Nastavi
 					</ConfirmButton>
 

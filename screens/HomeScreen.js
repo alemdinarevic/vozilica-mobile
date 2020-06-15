@@ -3,6 +3,7 @@ import {View, ScrollView, StyleSheet, Text} from 'react-native';
 
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useSelector, useDispatch } from 'react-redux';
 
 import moment from 'moment';
 
@@ -15,7 +16,7 @@ import HeaderButton from '../components/Buttons/HeaderButton';
 import Colors from '../constants/Colors';
 
 const HomeScreen = (props) => {
-
+	let token = useSelector(state => state.auth.userId)
 	const [enteredAddress, setEnteredAddress] = useState('');
 
 	const [startDate, setStartDate] = useState(new Date());
@@ -66,6 +67,8 @@ const HomeScreen = (props) => {
 				<Text style={styles.welcomeText1}>Dobrodošli na našu aplikaciju za rentanje vozila, pionirsku na našem tržištu.</Text>
 				<Text style={styles.welcomeText2}>NAPRAVI SVOJU REZERVACIJU</Text>
 			</View>
+
+			<Text>{token}</Text>
 
 			<Card style={styles.inputContainer}>
 

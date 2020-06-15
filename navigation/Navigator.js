@@ -7,6 +7,7 @@ import {createAppContainer} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createSwitchNavigator } from 'react-navigation-switch-transitioner'
 
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
@@ -17,6 +18,7 @@ import FilteredResultsScreen from '../screens/FilteredResultsScreen';
 import InboxScreen from '../screens/InboxScreen';
 import AddVehicleScreen from '../screens/AddVehicleScreen';
 import MiscellaneousScreen from '../screens/MiscellaneousScreen';
+import StartupScreen from '../screens/StartupScreen';
 
 import Header from '../components/Header';
 import Logo from '../components/Logo';
@@ -160,8 +162,14 @@ const BottomTabNavigator = createBottomTabNavigator({
 });
 
 const LeftSideDrawerNavigator = createDrawerNavigator({
-	Authentication: UserAuthNavigation,
-	Home: BottomTabNavigator
+	Home: BottomTabNavigator,
+	Authentication: UserAuthNavigation
 });
 
-export default createAppContainer(LeftSideDrawerNavigator);
+const MainNavigator = createSwitchNavigator({
+  StartupScreen: StartupScreen,
+  LeftSideDrawerNavigator: LeftSideDrawerNavigator
+});
+
+
+export default createAppContainer(MainNavigator);

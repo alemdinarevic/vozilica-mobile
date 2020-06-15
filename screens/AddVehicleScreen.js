@@ -65,9 +65,12 @@ const AddVehicleScreen = (props) => {
 						<Text>Godina</Text>
 						<ModalDropdown style={styles.modalDropdown} options={["Od", "Do"]} />
 					</View>
+
+					<ConfirmButton style={styles.confirmButton}>Objavi</ConfirmButton>
+
 				</Card>
 
-				<ConfirmButton>Objavi</ConfirmButton>
+				
   	  </View> 
     </ScrollView>
   );
@@ -82,10 +85,11 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20
 	},
 	inputsContainer: {
-		backgroundColor: 'white'
+		backgroundColor: 'white',
 	},
   inputFieldCard: {
-		padding: 10
+		padding: 10,
+		textAlign: 'center'
 	},
 	modalDropdown: {
 		height: 50,
@@ -94,6 +98,11 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		marginVertical: 5,
 		padding: 10
+	},
+	confirmButton: {
+		margin: 10,
+		alignItems: 'center',
+		justifyContent: 'center'
 	}
 });
 

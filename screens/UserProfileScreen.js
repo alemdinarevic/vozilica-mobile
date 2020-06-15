@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 
 import Colors from '../constants/Colors';
-import ListedVehicles from '../containers/ListedVehicles';
+import VehicleList from '../components/VehicleList';
 
 const UserProfileScreen = (props) => {
 	return (
@@ -18,7 +18,7 @@ const UserProfileScreen = (props) => {
 				</View>
 
 				<View style={styles.userInfoContainer}>
-					<Text style={styles.userInfoText}>username</Text>
+					<Text style={styles.userInfoTexq	}>username</Text>
 					<Text style={styles.userInfoText}>061123123</Text>
 				</View>
 
@@ -30,7 +30,7 @@ const UserProfileScreen = (props) => {
 
 			</View>
 
-			{/* <ListedVehicles /> */}
+			<VehicleList />
 
 		</View>
 	);

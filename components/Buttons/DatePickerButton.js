@@ -15,18 +15,18 @@ const DatePickerButton = (props) => {
 
 const styles = StyleSheet.create({
 	button: {
-        backgroundColor: Colors.secondary,
-        width: 100,
-        height: 50,
+		backgroundColor: Colors.secondary,
+		width: 100,
+		height: 50,
 		paddingVertical: 15,
 		paddingHorizontal: 30,
-        borderRadius: 25,
-        alignItems: 'center'
+		borderRadius: 15,
+		alignItems: 'center'
 	},
 	buttonText: {
 		color: 'white',
-        fontSize: 16,
-        textAlign: 'center'
+		fontSize: 16,
+		textAlign: 'center'
         
 	}
 });

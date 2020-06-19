@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.tertiary,
 		paddingVertical: 15,
 		paddingHorizontal: 30,
-        borderRadius: 25,
+        borderRadius: 15,
         width: 100,
         height: 50,
         alignItems: 'center'

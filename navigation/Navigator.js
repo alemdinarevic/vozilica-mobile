@@ -17,6 +17,7 @@ import FiltersScreen from '../screens/FiltersScreen';
 import FilteredResultsScreen from '../screens/FilteredResultsScreen';
 import InboxScreen from '../screens/InboxScreen';
 import AddVehicleScreen from '../screens/AddVehicleScreen';
+import VehicleDetailsScreen from '../screens/VehicleDetailsScreen';
 import MiscellaneousScreen from '../screens/MiscellaneousScreen';
 import StartupScreen from '../screens/StartupScreen';
 
@@ -32,48 +33,6 @@ const defaultStackNavigatorOptions = {
 	},
 	headerTintColor: 'white'
 }
-
-//from react-native-navigation website, ITS FUCKING SHIT
-// const Stack = createStackNavigator();
-// export default function mainNavigator() {
-// 	return (
-// 		<NavigationContainer>	
-// 			<Stack.Navigator initialRouteName="Home">
-// 				<Stack.Screen 
-// 					name="Home" 
-// 					component={HomeScreen} 
-// 					options={{ title: 'Vozilica' }}
-// 				/>
-// 				<Stack.Screen name="Auth" component={AuthScreen} />
-// 				<Stack.Screen name="Filters" component={FiltersScreen} />
-// 			</Stack.Navigator>
-// 		</NavigationContainer>
-// 	);
-// }
-	
-
-
-
-//trying to configure a different header for the homescreen
-// const HomeNavigator = createStackNavigator({
-// 	Home: {
-// 		screen: HomeScreen, 
-// 		navigationOptions: {
-// 				header: (navigation, header) => (
-// 					<Header />
-// 					// <View style={styles.header}>
-// 					// 	<View style={styles.logoContainer}>
-// 					// 		<Logo />
-// 					// 	</View>
-// 					// 	<Text style={styles.loginLink}>Prijavi se</Text>
-// 					// </View>
-// 				),
-// 				headerStyle: {
-// 					backgroundColor: Colors.secondary,
-// 				}
-// 		}	
-// 	}
-//});
 
 const HomeFiltersSearchNavigator = createStackNavigator({
 	Home: {
@@ -92,6 +51,12 @@ const HomeFiltersSearchNavigator = createStackNavigator({
 		screen: FilteredResultsScreen,
 		navigationOptions: {
 			title: 'Filtrirani rezultati'
+		}
+	},
+	VehicleDetails: {
+		screen: VehicleDetailsScreen,
+		navigationOptions: {
+			title: 'Detalji o vozilu'
 		}
 	}
 }, {
@@ -119,6 +84,17 @@ const UserAuthNavigation = createStackNavigator({
 	}
 );
 
+// when clicking on vehicle details, the back button brings it back to home, instead of userprofile. FIX!
+// const UserVehicleNavigator = createStackNavigator({
+// 	User: UserProfileScreen,
+// 	VehicleDetails: {
+// 		screen: VehicleDetailsScreen,
+// 		navigationOptions: {
+// 			title: 'Detalji o vozilu'
+// 		}
+// 	}
+// })
+
 const BottomTabNavigator = createBottomTabNavigator({
 	HomeFiltersSearch: {
 		screen: HomeFiltersSearchNavigator, 
@@ -133,7 +109,7 @@ const BottomTabNavigator = createBottomTabNavigator({
 		navigationOptions: {
 			tabBarIcon: (tabInfo) => {return <EvilIcons name='user' size={20} color={tabInfo.tintColor}/>}
 		}
-	},
+	}, 
 
 	AddVehicle: {
 		screen: AddVehicleScreen,

@@ -18,19 +18,19 @@ const UserProfileScreen = (props) => {
 				</View>
 
 				<View style={styles.userInfoContainer}>
-					<Text style={styles.userInfoTexq	}>username</Text>
+					<Text style={styles.userInfoText}>defaultUser</Text>
 					<Text style={styles.userInfoText}>061123123</Text>
 				</View>
 
 				<View style={styles.userStatsContainer}>
-					<Text style={styles.userInfoText}>Ducats: #</Text>
-					<Text style={styles.userInfoText}>Vehicles owned: #</Text>
-					<Text style={styles.userInfoText}>Vehicles rented: #</Text>
+					<Text style={styles.userInfoText}>Ducats: 100</Text>
+					<Text style={styles.userInfoText}>Vehicles owned: 7</Text>
+					<Text style={styles.userInfoText}>Vehicles rented: 0</Text>
 				</View>
 
 			</View>
 
-			<VehicleList />
+			<VehicleList navigation={props.navigation}/>
 
 		</View>
 	);
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 		height: Dimensions.get('window').width * 0.125,
 		borderRadius: Dimensions.get('window').width * 0.125 / 2,
 		borderWidth: 1,
-		borderColor: 'black',
+		borderColor: 'lightgrey',
 		overflow: 'hidden'
 	},
 	profilePicture: {

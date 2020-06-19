@@ -68,7 +68,7 @@ const HomeScreen = (props) => {
 				<Text style={styles.welcomeText2}>NAPRAVI SVOJU REZERVACIJU</Text>
 			</View>
 
-			<Text>{token}</Text>
+			{/* <Text>{token}</Text> */}
 
 			<Card style={styles.inputContainer}>
 
